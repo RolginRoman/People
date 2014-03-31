@@ -1,0 +1,59 @@
+﻿@model IEnumerable<MvcApplication1.Models.Person>
+
+@{
+    ViewBag.Title = "Index";
+    DateTime date = new DateTime();
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<form method="get">
+    <input type="search" name="srch" />
+    <input type="date" name="birthdate" value="@date" />
+    <input type="submit" value="Search" />
+</form>
+<table>
+    <tr>
+        <th>
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.Name).ToString(), "Index", new { nameSort = !(Request["nameSort"].AsBool()) })
+        </th>
+        <th>
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.Surname).ToString(), "Index", new { surnameSort = !(Request["surnameSort"].AsBool())})
+        </th>
+        <th>
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.Email).ToString(), "Index", new { emailSort = !(Request["emailSort"].AsBool()) })
+        </th>
+        <th>
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.Birthday).ToString(), "Index", new { birthdaySort = !(Request["birthdaySort"].AsBool()) })
+        </th>
+        <th>
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink(@Html.DisplayFor(modelItem => item.Surname).ToString(), "Details", new { id = item.ID })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Birthday)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>
