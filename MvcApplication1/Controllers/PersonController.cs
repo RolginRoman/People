@@ -22,7 +22,7 @@ namespace MvcApplication1.Controllers
         public ActionResult Index(string srch = null, string birthdate = null , string surnameSort = null, string birthdaySort = null, string nameSort = null, string emailSort = null)
         {
             var searched = db.Persons.Where(r => srch == null || r.Name.Contains(srch) || r.Surname.Contains(srch));
-            if (birthdate != null || birthdate != "")
+            if (birthdate != null && birthdate != "")
             {
                 DateTime date = DateTime.Parse(birthdate);
                 searched = searched.Where(r => r.Birthday == date);
